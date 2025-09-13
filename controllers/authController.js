@@ -1,7 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const sendMail = require("../utils/emailSender");
+const sendMailer = require("../config/mailer");
+const { sendPassword } = require("../config/mailFormat");
 
 exports.register = async (req, res) => {
   const { name, email, password, role, memberType } = req.body;
@@ -17,10 +18,10 @@ exports.register = async (req, res) => {
     });
 
     // send welcome email
-    await sendMail(
+    await sendMailer(
       email,
       "Welcome to LMS",
-      `Hi ${name}, your account has been created.`
+      sendPassword(name,email,password)
     );
 
     res.json({ message: "User registered and email sent", user });

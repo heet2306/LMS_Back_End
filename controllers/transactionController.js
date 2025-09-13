@@ -40,6 +40,7 @@ exports.returnBook = async (req, res) => {
 };
 
 exports.getTransactions = async (req, res) => {
+  // res.send(req.user)
   const transactions = await Transaction.find({ user: req.user.id }).populate(
     "book"
   );

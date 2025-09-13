@@ -12,7 +12,7 @@ exports.updateUserRole = async (req, res) => {
     return res.status(400).json({ message: "Invalid role" });
 
   const user = await User.findByIdAndUpdate(
-    userId,
+    {_id:userId},
     { role: newRole },
     { new: true }
   );

@@ -11,16 +11,16 @@ const router = express.Router();
 router.post(
   "/borrow",
   authenticateToken,
-  authorizeRoles("Admin", "Librarian"),
+  authorizeRoles("Member"),
   borrowBook
 );
 router.post(
   "/return",
   authenticateToken,
-  authorizeRoles("Admin", "Librarian"),
+  authorizeRoles("Member"),
   returnBook
 );
-router.get("/:memberId", authenticateToken, getTransactions);
+router.get("/", authenticateToken, getTransactions);
 
 module.exports = router;
 
